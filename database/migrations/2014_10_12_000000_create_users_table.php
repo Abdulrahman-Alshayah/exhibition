@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('user_type')->default(3); // حقل نوع المستخدم
+            $table->string('user_type'); // حقل نوع المستخدم
             $table->string('company')->nullable(); // معلومات الشركة
             $table->string('commercial_registration')->nullable(); // رقم السجل التجاري
             $table->string('company_email')->nullable(); // ايميل الشركة

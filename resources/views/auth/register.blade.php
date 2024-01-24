@@ -45,6 +45,19 @@
                                 name="password_confirmation" required />
             </div>
 
+            <div class="form-check mt-4">
+                <input class="form-check-input" type="radio" name="user_type" id="seller" value="2">
+                <label class="form-check-label" for="seller">
+                بائع
+                </label>
+            </div>
+
+            <div class="form-check mt-4">
+                <input class="form-check-input" type="radio" name="user_type" id="customer" value="3">
+                <label class="form-check-label" for="customer">
+                زبون
+                </label>
+            </div>
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
