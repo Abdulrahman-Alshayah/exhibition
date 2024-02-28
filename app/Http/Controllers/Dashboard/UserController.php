@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     use UploadTrait;
 
@@ -22,13 +22,22 @@ class ProfileController extends Controller
     {
         $this->Users = $Users;
     }
-    public function index()
+    public function profile()
     {
-        return $this->Users->index();
+        return $this->Users->profile();
     }
 
-    public function update(Request $request)
+    public function updateProfile(Request $request)
     {
-        return $this->Users->update($request);
+        return $this->Users->updateProfile($request);
+    }
+
+    public function showUsers()
+    {
+        return $this->Users->showUsers();
+    }
+    public function updateUser(Request $request)
+    {
+        return $this->Users->updateUser($request);
     }
 }

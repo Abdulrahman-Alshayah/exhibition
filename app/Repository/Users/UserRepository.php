@@ -4,6 +4,7 @@ namespace App\Repository\Users;
 
 use App\Http\Requests\UserRequest;
 use App\Interfaces\Users\UserRepositoryInterface;
+use App\Models\User;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,13 @@ class UserRepository implements UserRepositoryInterface
 {
     use UploadTrait;
 
-    public function index()
+    public function profile()
     {
         $user = Auth::user();
         return view('Dashboard.User.profile', compact('user'));
     }
 
-    public function update($request)
+    public function updateProfile($request)
     {
         DB::beginTransaction();
 
@@ -66,5 +67,26 @@ class UserRepository implements UserRepositoryInterface
             DB::rollback();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+    public function showUsers()
+    {
+        if (Auth::user()->user_type == 1) {
+            $users = User::get();
+            return view('Dashboard.User.users', compact('users'));
+        } else
+            return redirect()->back()->withErrors(['error' => 'انت لا تمتلك حق الوصول لهذه الصفحة']);
+    }
+    public function updateUser($request)
+    {
+        $user = User::findOrFail($request->id);
+        if ($request->has('user_type')) {
+            $user->user_type = $request->user_type;
+        }
+        if ($request->has('status')) {
+            $user->status = $request->input('status');
+        }
+        $user->save();
+        session()->flash('edit');
+        return redirect()->back();
     }
 }

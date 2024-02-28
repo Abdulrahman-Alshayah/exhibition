@@ -5,8 +5,14 @@ namespace App\Interfaces\Users;
 interface UserRepositoryInterface
 {
     // get User
-    public function index();
+    public function profile();
 
     // update User
-    public function update($request);
+    public function updateProfile($request);
+
+    // show Users
+    public function showUsers();
+
+    // update user data
+    public function updateUser($request);
 }

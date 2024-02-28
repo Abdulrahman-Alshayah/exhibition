@@ -24,7 +24,17 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"> {{ trans('profile.profile') }}</h4><span
+                <h4 class="content-title mb-0 my-auto"> {{ trans('profile.profile') }}
+                    @if(Auth::user()->user_type == 1)
+                    للآدمن
+                    @endif
+                  @if(Auth::user()->user_type == 2)
+                    للبائع
+                  @endif
+                  @if(Auth::user()->user_type == 3)
+                  للزبون
+                  @endif
+                </h4><span
                     class="text-muted mt-1 tx-13 mr-2 mb-0">/
                {{ trans('profile.Update_your_information') }}</span>
             </div>
@@ -147,8 +157,8 @@
                                     <label for="exampleInputEmail1">{{ trans('profile.mobile_number') }}</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" value="{{$user->phone}}" name="phone" type="tel">
-                                    <input class="form-control" value="{{$user->id}}" name="id" type="hidden">
+                                    <input class="form-control" value="{{$user->mobile_number}}" name="mobile_number" type="tel">
+                                    {{-- <input class="form-control" value="{{$user->id}}" name="id" type="hidden"> --}}
                                 </div>
                             </div>
 
@@ -174,7 +184,7 @@
                                     <label for="exampleInputEmail1">{{ trans('profile.website') }}</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input type="url" class="form-control" id="website" name="website" placeholder="https://example.com">
+                                    <input type="url" class="form-control" id="website" value="{{$user->website}}" name="website" placeholder="https://example.com">
                                 </div>
                             </div>
 

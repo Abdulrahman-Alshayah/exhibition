@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,9 +32,11 @@ Route::group(
         })->middleware(['auth'])->name('dashboard.user');
 
 
-        Route::get('/Profile', [ProfileController::class, 'index'])->middleware(['auth', 'verified'])->name('profile');
-        Route::post('/Profile/update', [ProfileController::class, 'update'])->middleware(['auth', 'verified'])->name('profile.update');
+        Route::get('/Profile', [UserController::class, 'profile'])->middleware(['auth', 'verified'])->name('profile');
+        Route::post('/Profile/update', [UserController::class, 'updateProfile'])->middleware(['auth', 'verified'])->name('profile.update');
 
+        Route::get('/users', [UserController::class, 'showUsers'])->middleware(['auth', 'verified'])->name('users.index');
+        Route::post('/users/update', [UserController::class, 'updateUser'])->middleware(['auth', 'verified'])->name('users.update');
 
         require __DIR__ . '/auth.php';
     }

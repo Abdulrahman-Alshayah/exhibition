@@ -10,7 +10,15 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">welcome User</h2>
+                        @if(Auth::user()->user_type == 1)
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">welcome Admin</h2>
+                        @endif
+                        @if(Auth::user()->user_type == 2)
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">welcome Saller</h2>
+                        @endif
+                        @if(Auth::user()->user_type == 3)
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">welcome Comstomer</h2>
+                        @endif
 						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
 						</div>
 					</div>

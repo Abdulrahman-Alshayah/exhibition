@@ -52,7 +52,11 @@
                                                     </div>
                                                 </form>
                                                 <div class="main-signin-footer mt-5">
-                                                    <p><a href="">Forgot password?</a></p>
+                                                    @if (Route::has('password.request'))
+                                                        <a href="{{ route('password.request') }}">
+                                                            {{ __('Forgot your password?') }}
+                                                        </a>
+                                                    @endif
                                                     <p>Don't have an account? <a href="{{ url('/' . $page='signup') }}">Create an Account</a></p>
                                                 </div>
                                             </div>
