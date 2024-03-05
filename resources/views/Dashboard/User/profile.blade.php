@@ -76,6 +76,7 @@
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
                                     <input class="form-control" name="name" value="{{$user->name}}" type="text">
+                                    <input class="form-control" name="id" value="{{$user->id}}" type="id">
                                 </div>
                             </div>
 

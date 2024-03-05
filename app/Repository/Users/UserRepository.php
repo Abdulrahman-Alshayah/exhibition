@@ -48,7 +48,6 @@ class UserRepository implements UserRepositoryInterface
             $user->contact_person = $request->contact_person;
 
             $user->save();
-
             // update photo
             if ($request->has('photo')) {
                 // Delete old photo
