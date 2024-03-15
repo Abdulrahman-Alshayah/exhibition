@@ -16,7 +16,7 @@
     <link href="{{URL::asset('Dashboard/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
 
 @section('title')
-    {{trans('doctors.add_doctor')}}
+    تعديل منتج
 @stop
 @endsection
 @section('page-header')
@@ -24,9 +24,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"> {{trans('main-sidebar_trans.doctors')}}</h4><span
-                    class="text-muted mt-1 tx-13 mr-2 mb-0">/
-               {{trans('doctors.add_doctor')}}</span>
+                <h4 class="content-title mb-0 my-auto"> تعديل منتج</h4>
             </div>
         </div>
     </div>
@@ -41,110 +39,70 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('Doctors.update', 'test') }}" method="post" autocomplete="off"
-                          enctype="multipart/form-data">
-                        {{ method_field('patch') }}
-                        {{ csrf_field() }}
+                    <form action="{{route('products.update')}}" method="post" autocomplete="off"
+                        enctype="multipart/form-data">
+                        {{ method_field('post') }}
+                        @csrf
                         <div class="pd-30 pd-sm-40 bg-gray-200">
-                            <div>
-                                @if($doctor->image)
-                                    <img style="border-radius:20%"
-                                         src="{{Url::asset('Dashboard/img/doctors/'.$doctor->image->filename)}}"
-                                         height="150px" width="150px" alt="">
-                                @else
-                                    <img style="border-radius:50%"
-                                         src="{{Url::asset('Dashboard/img/doctor_default.png')}}"
-                                         height="50px"
-                                         width="50px" alt="">
-                                @endif
-                            </div>
-                            <br><br>
 
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{trans('doctors.name')}}</label>
+                                    <label for="exampleInputEmail1">اسم المنتج</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" name="name" value="{{$doctor->name}}" type="text">
+                                    <input class="form-control" name="name" value="{{$product->name}}" type="text">
+                                    <input class="form-control" name="id" value="{{$product->id}}" type="hidden">
                                 </div>
                             </div>
 
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{trans('doctors.email')}}</label>
+                                    <label for="price">السعر</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" value="{{$doctor->email}}" name="email" type="email">
-                                </div>
-                            </div>
-
-
-                            <div class="row row-xs align-items-center mg-b-20">
-                                <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{ trans('doctors.phone') }}</label>
-                                </div>
-                                <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" value="{{$doctor->phone}}" name="phone" type="tel">
-                                    <input class="form-control" value="{{$doctor->id}}" name="id" type="hidden">
+                                    <input class="form-control" id="price" name="price" value="{{$product->price}}" type="number">
                                 </div>
                             </div>
 
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{trans('doctors.section')}}</label>
+                                    <label for="description">الوصف</label>
                                 </div>
-
-                                <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <select name="section_id" class="form-control SlectBox">
-                                        @foreach($sections as $section)
-                                            <option
-                                                value="{{$section->id}}" {{$section->id == $doctor->section_id ? 'selected':"" }}>{{$section->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class=" row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{trans('doctors.appointments')}}</label>
+                                    <textarea id="description" name="description" style="width:880px">{{$product->description}}</textarea>
                                 </div>
-
-                                <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <select multiple="multiple" class="testselect2" name="appointments[]">
-                                        @foreach($appointments as $appointment)
-                                            @php $check = []; @endphp
-                                            @foreach ($doctor->doctorappointments as $key => $appointmentDOC)
-                                                @php
-                                                    $check[] = $appointmentDOC->id;
-                                                @endphp
-                                            @endforeach
-                                            <option value="{{$appointment->id}}" {{ in_array($appointment->id, $check) ? 'selected' : '' }}>{{$appointment->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                             </div>
 
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{ trans('Doctors.doctor_photo') }}</label>
+                                    <label for="specifications">المواصفات</label>
+                                </div>
+                                <div class="col-md-11 mg-t-5 mg-md-t-0">
+                                    <textarea id="specifications" name="specifications" style="width:880px;height:50px">{{$product->specifications}}</textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row row-xs align-items-center mg-b-20">
+                                <div class="col-md-1">
+                                    <label for="image">{{ trans('profile.image') }}</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
                                     <input type="file" accept="image/*" name="photo" onchange="loadFile(event)">
-                                    <img style="border-radius:50%" width="150px" height="150px" id="output"/>
+                                    @if($product->image)
+                                    <img src="{{Url::asset('dashboard/img/product/'.$product->image->filename)}}"
+                                         height="50px" width="50px" alt="">
+
+                                @else
+                                    <img src="{{Url::asset('dashboard/img/product_default.jpg')}}" height="50px"
+                                         width="50px" alt="">
+                                @endif
                                 </div>
                             </div>
 
 
-                            <button type="submit"
-                                    class="btn btn-main-primary pd-x-30 mg-r-5 mg-t-5">{{ trans('Doctors.submit') }}</button>
+                            <button type="submit" class="btn btn-main-primary pd-x-30 mg-r-5 mg-t-5">تعديل المنتج</button>
                         </div>
                     </form>
                 </div>
