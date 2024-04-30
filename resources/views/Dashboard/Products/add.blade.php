@@ -83,6 +83,30 @@
 
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
+                                    <label for="projectinput1"> اختر القسم </label>
+                                </div>
+
+                                    <div class="col-md-11 mg-t-5 mg-md-t-0">
+
+                                        <select name="categories[]" class="select2 form-control" multiple>
+                                            <optgroup label="من فضلك أختر القسم ">
+                                                @if($categories && $categories -> count() > 0)
+                                                    @foreach($categories as $category)
+                                                        <option
+                                                            value="{{$category -> id }}">{{$category -> name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </optgroup>
+                                        </select>
+                                        @error('categories.0')
+                                        <span class="text-danger"> {{$message}}</span>
+                                        @enderror
+                                </div>
+
+
+
+                            <div class="row row-xs align-items-center mg-b-20">
+                                <div class="col-md-1">
                                     <label for="image">{{ trans('profile.image') }}</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">

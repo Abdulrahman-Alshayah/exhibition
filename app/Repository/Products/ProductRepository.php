@@ -4,6 +4,7 @@ namespace App\Repository\Products;
 
 use App\Interfaces\Products\ProductRepositoryInterface;
 use App\Models\Appointment;
+use App\Models\Category;
 use App\Models\Doctor;
 use App\Models\Image;
 use App\Models\Product;
@@ -29,7 +30,8 @@ class ProductRepository implements ProductRepositoryInterface
     public function create()
     {
         if (Auth::user()->user_type == 2) {
-            return view('Dashboard.Products.add');
+            $categories = Category::get();
+            return view('Dashboard.Products.add', compact('categories'));
         }
         return redirect()->back()->withErrors(['error' => 'انت لا تمتلك حق الوصول لهذه الصفحة']);
     }
@@ -47,6 +49,11 @@ class ProductRepository implements ProductRepositoryInterface
             $product->user_id = Auth::user()->id;
             $product->status = 0;
             $product->save();
+
+            //save product categories
+
+            $product->categories()->attach($request->categories);
+
             if ($request->has('photo')) {
                 // Delete old photo
                 if ($product->image) {
@@ -59,7 +66,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             DB::commit();
             session()->flash('add');
-            return redirect()->route('add.product');
+            return redirect()->route('products.create');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -89,7 +96,11 @@ class ProductRepository implements ProductRepositoryInterface
             $product->user_id = Auth::user()->id;
             $product->status = 0;
             $product->save();
-            // $product = Product::create($request->all());
+
+            //save product categories
+
+            $product->categories()->sync($request->categories);
+
             if ($request->has('photo')) {
                 // Delete old photo
                 if ($product->image) {
@@ -102,7 +113,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             DB::commit();
             session()->flash('edit');
-            return redirect()->route('add.product');
+            return redirect()->route('products.create');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);

@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => Hash::make('11223344'),
             'user_type' => 1,
+            'email_verified_at' => date(now()),
         ]);
     }
 }

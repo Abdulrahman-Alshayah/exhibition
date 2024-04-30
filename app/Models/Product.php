@@ -17,4 +17,14 @@ class Product extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function getStatus()
+    {
+        return $this->status == 0 ? 'غير مفعل' : 'مفعل';
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'products_categories');
+    }
 }
