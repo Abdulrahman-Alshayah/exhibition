@@ -62,7 +62,7 @@
                                                             {{ __('Forgot your password?') }}
                                                         </a>
                                                     @endif
-                                                    <p>Don't have an account? <a href="{{ url('/' . $page='signup') }}">Create an Account</a></p>
+                                                    <p>Don't have an account? <a href="{{ url('/' . $page='register') }}">Create an Account</a></p>
                                                 </div>
                                             </div>
 

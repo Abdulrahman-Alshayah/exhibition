@@ -13,7 +13,7 @@
 </head>
     <body>
                 <!-- main-content -->
-				@yield('page-header')
+				{{-- @yield('page-header') --}}
                 @include('WebSite.layouts.topbar')
                 @include('WebSite.layouts.navbar')
 				@yield('content')

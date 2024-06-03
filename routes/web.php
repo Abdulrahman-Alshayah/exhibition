@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\WebSite\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/home', [HomeController::class, 'index']);
-Route::get('/home/{cat}', [HomeController::class, 'getProductCat'])->name('getcat');
+Route::get('/home/{id}', [HomeController::class, 'getProductCat'])->name('getcat');
+Route::post('/home/search', [HomeController::class, 'search'])->name('search');
+Route::get('/home/detail/{id}', [HomeController::class, 'detail'])->name('detail');
