@@ -20,7 +20,7 @@
                         @foreach ($categories as $cat)
                             <a href="/home/{{$cat->id}}" class="nav-item nav-link">{{$cat->name}}</a>
                             @foreach ($cat->childrens as $subCat)
-                            <a href="{{route('getcat',$subCat->name)}}" class="nav-item nav-link">{{$subCat->name}}</a>
+                            <a href="{{route('getcat',$subCat->id)}}" class="nav-item nav-link">{{$subCat->name}}</a>
                             @endforeach
                         @endforeach
                     @endisset
