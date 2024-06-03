@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/home/{id}', [HomeController::class, 'getProductCat'])->name('getcat');
 Route::post('/home/search', [HomeController::class, 'search'])->name('search');
 Route::get('/home/detail/{id}', [HomeController::class, 'detail'])->name('detail');
