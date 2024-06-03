@@ -15,10 +15,9 @@ class   HomeController extends Controller
     public function index()
     {
 
-        $Products = Product::query()
+        $products = Product::query()
             ->select('products.*')
-            ->join('users', 'products.user_id', '=', 'users.id')
-            ->groupBy('users.id')
+            ->join('users', 'products.user_id', '=', 'user_id')
             ->orderByRaw('RAND()')
             ->get();
 
